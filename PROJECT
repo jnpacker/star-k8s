@@ -1,0 +1,7 @@
+domain: cluster.open-cluster-management.io
+repo: open-cluster-management/star-k8s
+resources:
+- group: cluster.open-cluster-management.io
+  kind: StarK8sDeployment
+  version: v1alpha1
+version: "2"

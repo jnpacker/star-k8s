@@ -1,0 +1,20 @@
+# permissions for end users to view stark8sdeployments.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: stark8sdeployment-viewer-role
+rules:
+- apiGroups:
+  - cluster.open-cluster-management.io
+  resources:
+  - stark8sdeployments
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - cluster.open-cluster-management.io
+  resources:
+  - stark8sdeployments/status
+  verbs:
+  - get

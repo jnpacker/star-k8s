@@ -1,0 +1,97 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.6.2
+  creationTimestamp: null
+  name: stark8sdeployments.cluster.open-cluster-management.io
+spec:
+  group: cluster.open-cluster-management.io
+  names:
+    kind: StarK8sDeployment
+    listKind: StarK8sDeploymentList
+    plural: stark8sdeployments
+    singular: stark8sdeployment
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: StarK8sDeployment is the Schema for the stark8sdeployments API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: StarK8sDeploymentSpec defines the desired state of StarK8sDeployment
+            properties:
+              powerState:
+                type: string
+              provider:
+                properties:
+                  EKS:
+                    properties:
+                      controlPlane:
+                        properties:
+                          nodes:
+                            type: integer
+                          spec:
+                            type: object
+                        required:
+                        - nodes
+                        type: object
+                      dataPlane:
+                        items:
+                          properties:
+                            nodes:
+                              type: integer
+                            spec:
+                              type: object
+                          required:
+                          - nodes
+                          type: object
+                        type: array
+                    required:
+                    - controlPlane
+                    type: object
+                type: object
+              providerSecretRef:
+                description: "SecretEnvSource selects a Secret to populate the environment
+                  variables with. \n The contents of the target Secret's Data field
+                  will represent the key-value pairs as environment variables."
+                properties:
+                  name:
+                    description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                      TODO: Add other useful fields. apiVersion, kind, uid?'
+                    type: string
+                  optional:
+                    description: Specify whether the Secret must be defined
+                    type: boolean
+                type: object
+            required:
+            - provider
+            - providerSecretRef
+            type: object
+          status:
+            description: StarK8sDeploymentStatus defines the observed state of StarK8sDeployment
+            type: object
+        type: object
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

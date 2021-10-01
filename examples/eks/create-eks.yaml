@@ -1,0 +1,18 @@
+apiVersion: cluster.open-cluster-management.io/v1alpha1
+kind: StarK8sDeployment
+metadata:
+  name: jnp-eks01
+spec:
+  provider: eks
+  providerSecretRef:
+    name: aws4jnp
+  provider:
+    EKS:
+      controlPlane:
+        nodes: 3
+        spec:
+          foo: bar
+      dataPlane:
+      - nodes: 3
+        spec:
+          foo: bar2
